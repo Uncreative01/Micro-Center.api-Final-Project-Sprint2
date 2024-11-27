@@ -1,0 +1,69 @@
+User Routes:
+Sign Up (POST):
+
+URL: http://localhost:3000/users/signup
+Method: POST
+Body (x-www-form-urlencoded):
+email: your_email@example.com
+password: your_password
+first_name: John
+last_name: Doe
+Login (POST):
+
+URL: http://localhost:3000/users/login
+Method: POST
+Body (x-www-form-urlencoded):
+email: your_email@example.com
+password: your_password
+Logout (POST):
+
+URL: http://localhost:3000/users/logout
+Method: POST
+Body: Empty (no body required)
+Get Session (GET):
+
+URL: http://localhost:3000/users/getSession
+Method: GET
+Response: Placeholder message since session functionality may not be implemented yet.
+Get All Users (GET):
+
+URL: http://localhost:3000/users/all
+Method: GET
+Response: List of all users in the database.
+Product Routes:
+Get All Products (GET):
+
+URL: http://localhost:3000/products/all
+Method: GET
+Response: List of all products in the database (name, description, cost, image filename, etc.)
+Get Product by ID (GET):
+
+URL: http://localhost:3000/products/:id
+Replace :id with the product ID (e.g., 1 for the first product).
+Method: GET
+Response: Details of the product with the specified ID (name, description, cost, etc.)
+Add a New Product (POST):
+
+URL: http://localhost:3000/products/add
+Method: POST
+Body (x-www-form-urlencoded):
+name: Product Name
+description: Product Description
+cost: Product Cost (e.g., 99.99)
+image_filename: Image File Name (e.g., pic1.jpg)
+Update Product by ID (PUT):
+
+URL: http://localhost:3000/products/update/:id
+Replace :id with the product ID (e.g., 1 for the first product).
+Method: PUT
+Body (x-www-form-urlencoded):
+name: New Product Name
+description: New Product Description
+cost: New Product Cost
+image_filename: New Image File Name
+Delete Product by ID (DELETE):
+
+URL: http://localhost:3000/products/delete/:id
+Replace :id with the product ID (e.g., 1 for the first product).
+Method: DELETE
+Response: Confirmation message of successful deletion.

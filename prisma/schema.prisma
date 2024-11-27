@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"  // This points to your SQLite database file
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  product_id     Int             @id @default(autoincrement())  // Primary key, auto-increment
+  name           String          // Name of the product
+  description    String          // Description of the product
+  cost           Float           // Cost of the product
+  image_filename String          // Filename for the product image
+
+  // Reverse relation to PurchaseItem
+  purchaseItems  PurchaseItem[]  // A product can appear in many purchase items
+}
+
+model Customer {
+  customer_id Int     @id @default(autoincrement())  // Primary key, auto-increment
+  email       String  @unique  // Unique email for the customer
+  password    String  // Password of the customer (hashed)
+  first_name  String  // First name of the customer
+  last_name   String  // Last name of the customer
+
+  // A customer can have many purchases
+  purchases   Purchase[]  // Reverse relation to the Purchase model
+}
+
+model Purchase {
+  purchase_id   Int      @id @default(autoincrement())  // Primary key, auto-increment
+  customer_id   Int      // Foreign key to the customer
+  street        String   // Street address for shipping
+  city          String   // City for shipping
+  province      String   // Province for shipping
+  country       String   // Country for shipping
+  postal_code   String   // Postal code for shipping
+  credit_card   String   // Credit card number (encrypted in production)
+  credit_expire String   // Credit card expiration date
+  credit_cvv    String   // Credit card CVV (encrypted in production)
+  invoice_amt   Float    // Total invoice amount
+  invoice_tax   Float    // Tax applied to the invoice
+  invoice_total Float    // Total amount with tax
+  order_date    DateTime @default(now())  // Timestamp of order date
+
+  // Relation to Customer
+  customer      Customer @relation(fields: [customer_id], references: [customer_id])
+
+  // Relation to PurchaseItem
+  purchaseItems PurchaseItem[]
+
+  @@index([customer_id])  // Index on customer_id for performance
+}
+
+model PurchaseItem {
+  purchase_id Int
+  product_id  Int
+  quantity    Int
+
+  // Relation to Purchase
+  purchase    Purchase @relation(fields: [purchase_id], references: [purchase_id])
+
+  // Relation to Product
+  product     Product  @relation(fields: [product_id], references: [product_id])
+
+  // Composite primary key for purchase_id and product_id
+  @@id([purchase_id, product_id]) // Composite primary key
+}

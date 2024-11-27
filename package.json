@@ -1,0 +1,38 @@
+{
+  "name": "online_store_api",
+  "version": "1.0.0",
+  "description": "API for an Micro-Center Rip-Off, built with Node.js, Express, and Prisma.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "migrate": "prisma migrate dev --name init",
+    "generate": "prisma generate"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "Prisma",
+    "API",
+    "SQLite"
+  ],
+  "author": "Jacob Poirier",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "express-session": "^1.18.1",
+    "password-validator": "^5.3.0",
+    "prisma": "^5.22.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
